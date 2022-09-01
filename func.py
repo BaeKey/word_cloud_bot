@@ -35,7 +35,7 @@ def rank(update, context):
         except Exception as e:
             username = update.effective_user.id
         # 限制为群组
-        if chat_type != "supergroup":
+        if chat_type != "supergroup" and chat_type != "group":
             update.message.reply_text("此命令只有在群组中有效")
             return
         if RANK_COMMAND_MODE == 1:
@@ -85,7 +85,7 @@ def chat_content_exec(update, context):
         user_id = update.effective_user.id
         chat_id = update.effective_message.chat_id
         # 限制为群组
-        if chat_type != "supergroup":
+        if chat_type != "supergroup" and chat_type != "group":
             return
         # 限制文字长度不能超过80字
         if len(text) > 80:
