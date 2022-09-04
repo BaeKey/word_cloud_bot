@@ -130,23 +130,6 @@ def generate(group):
             for i in range(min(5, len(word_amount))):
                 hot_word_string += "\t\t\t\t\t\t\t\t" + "`" + str(word_amount[i][0]) + "`" + ": " + str(
                     word_amount[i][1]) + "\n"
-            # print(hot_word_string)
-            bot.send_message(
-                chat_id=group,
-                text="🎤 今日话题榜 🎤\n"
-                     "📅 {}\n"
-                     "⏱ 截至今天{}\n"
-                     "🗣️ 本群{}位朋友共产生{}条发言\n"
-                     "🤹‍ 大家今天讨论最多的是：\n\n"
-                     "{}\n"
-                     "看下有没有你感兴趣的话题? 👏".format(
-                    time.strftime("%Y年%m月%d日", time.localtime()),
-                    time.strftime("%H:%M", time.localtime()),
-                    user_amount,
-                    total_message_amount,
-                    hot_word_string),
-                parse_mode="Markdown"
-            )
     else:
         bot.send_message(
             chat_id=group,
@@ -161,20 +144,6 @@ def generate(group):
             dis_name = str(user_message_amount[i][0])
             top_5_user += "\t\t\t\t\t\t\t\t" + "🎖`" + dis_name[:min(8, len(dis_name))] + "`" + " 贡献: " + str(
                 user_message_amount[i][1]) + "\n"
-        # print(top_5_user)
-        bot.send_message(
-            chat_id=group,
-            text="🏵 今日活跃用户排行榜 🏵\n"
-                 "📅 {}\n"
-                 "⏱ 截至今天{}\n\n"
-                 "{}\n"
-                 "感谢这些朋友今天的分享! 👏 \n"
-                 "遇到问题,向他们请教说不定有惊喜😃".format(
-                time.strftime("%Y年%m月%d日", time.localtime()),
-                time.strftime("%H:%M", time.localtime()),
-                top_5_user),
-            parse_mode="Markdown"
-        )
     else:
         bot.send_message(
             chat_id=group,
@@ -189,16 +158,26 @@ def generate(group):
         w.to_file('{}_chat_word_cloud.png'.format(group))
         bot.send_photo(
             chat_id=group,
-            photo=open("{}_chat_word_cloud.png".format(group), "rb")
+            photo=open("{}_chat_word_cloud.png".format(group), "rb"),
+            caption= "\n"
+                 "📅 截至{} ⏱ {}\n"
+                 "🗣️ 本群{}位朋友共产生{}条发言\n"
+                 "🤹‍ 大家今天讨论最多的是：\n\n"
+                 "{}\n"
+                 "🏵 今日活跃用户排行榜： \n\n"
+                 "{}\n".format(
+                time.strftime("%Y年%m月%d日", time.localtime()),
+                time.strftime("%H:%M", time.localtime()),
+                user_amount,
+                total_message_amount,
+                hot_word_string,
+                top_5_user),
+            parse_mode="Markdown"
         )
         os.remove("{}_chat_word_cloud.png".format(group))
     except Exception as e:
         print(e)
         print("词云图片生成失败")
-        # bot.send_message(
-        #     chat_id=group,
-        #     text="当前聊天数据量过小，嗨起来吧~"
-        # )
 
 
 def flush_redis():
