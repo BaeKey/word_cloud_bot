@@ -39,7 +39,7 @@ timedatectl list-timezones
 纽约 America/New_York
 
 # 编辑Dockerfile
-vi /root/Dockerfile
+vi ~/word_cloud_bot/Dockerfile
 
 # 在第7行修改服务器所属时区，原文件为：
 RUN ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
