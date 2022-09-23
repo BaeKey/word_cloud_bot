@@ -26,7 +26,7 @@ docker pull redis
 # 创建 entrypoint.sh 入口文件
 echo '#! /bin/sh \
 cd /root/word_cloud_bot && python3 main.py >> output 2>&1 &
-tail -f /dev/null' > /root/entrypoint.sh
+tail -f /dev/null' > ~/word_cloud_bot/entrypoint.sh
 
 # 创建 Dockerfile
 wget -O /root/Dockerfile https://github.com/BaeKey/word_cloud_bot/raw/master/Dockerfile
