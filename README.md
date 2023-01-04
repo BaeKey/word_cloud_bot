@@ -16,6 +16,7 @@ v2.5
 
 ## 安装方法
 
+使用root账户
 
 ```angular2html
 cd ~ && mkdir word_cloud_bot && cd word_cloud_bot
@@ -25,7 +26,7 @@ docker pull redis
 
 # 创建 entrypoint.sh 入口文件
 echo '#! /bin/sh \
-cd /root/word_cloud_bot && python3 main.py >> output 2>&1 &
+cd ~/word_cloud_bot && python3 main.py >> output 2>&1 &
 tail -f /dev/null' > ~/word_cloud_bot/entrypoint.sh
 
 # 创建 Dockerfile
@@ -48,7 +49,7 @@ RUN ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
 
 # 在第10行修改你的机器人TOKEN
 修改后：
-RUN sed -i '1c TOKEN = "1749418611:AAGcpouQ4EWSDITLQXFozHjMgT_-MsVSmDM"' /root/word_cloud_bot/config.py
+RUN sed -i '1c TOKEN = "1749418611:AAGcpouQ4EWSDITLQXFozHjMgT_-MsVSmDM"' ~/word_cloud_bot/config.py
 
 
 # 根据 Dockerfile 创建镜像
