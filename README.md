@@ -29,7 +29,7 @@ cd /root/word_cloud_bot && python3 main.py >> output 2>&1 &
 tail -f /dev/null' > ~/word_cloud_bot/entrypoint.sh
 
 # 创建 Dockerfile
-wget -O /root/Dockerfile https://github.com/BaeKey/word_cloud_bot/raw/master/Dockerfile
+wget -O ~/word_cloud_bot/Dockerfile https://github.com/BaeKey/word_cloud_bot/raw/master/Dockerfile
 
 # 使用命令查看所有时区
 timedatectl list-timezones
