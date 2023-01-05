@@ -5,8 +5,8 @@ import schedule
 from task import schedule_task, flush_redis, do_task
 import threading
 
-schedule.every().day.at('12:00').do(schedule_task)
-schedule.every().day.at('12:01').do(flush_redis)
+schedule.every().day.at('00:00').do(schedule_task)
+schedule.every().day.at('00:01').do(flush_redis)
 
 # 测试代码，每分钟推送数据，非测试目的不要取消注释下一行
 # schedule.every(1).minutes.do(schedule_task)
